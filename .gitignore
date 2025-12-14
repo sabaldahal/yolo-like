@@ -1,0 +1,56 @@
+# Python
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env
+.env.* 
+
+# IDEs / editors
+.vscode/
+.idea/
+*.sublime-*
+*.swp
+
+# macOS
+**/.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# PyTorch / models / checkpoints / outputs
+*.pt
+*.pth
+*.ckpt
+*.onnx
+weights/
+runs/
+logs/
+checkpoints/
+models/
+outputs/
+results/
+
+# Data and datasets
+**/local/
+data/
+datasets/
+**/dataset/
+*.zip
+*.tar.gz
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+
+# Misc
+*.log
+*.cache
+coverage.xml
