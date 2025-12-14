@@ -1,9 +1,7 @@
 import argparse
 import sys
 from utils.constants import *
-from modes.train import *
-from modes.test import *
-from modes.detect import *
+
 
 
 def build_parser():
@@ -62,10 +60,10 @@ def build_parser():
         default=CONSTANTS.IMAGE_SIZE,
     )
 
-    # TEST
+    # detect
     test_parser = subparsers.add_parser(
-        "test",
-        help="Evaluate a trained model",
+        "detect",
+        help="Run Prediction",
     )
 
     test_parser.add_argument(
@@ -93,37 +91,7 @@ def build_parser():
         default=CONSTANTS.IMAGE_SIZE,
     )
 
-    # DETECT
 
-    detect_parser = subparsers.add_parser(
-        "detect",
-        help="Run inference",
-    )
-
-    detect_parser.add_argument(
-        "--path",
-        type=str,
-        required=True,
-        help="path to image",
-    )
-
-    detect_parser.add_argument(
-        "--weights",
-        type=str,
-        required=CONSTANTS.CHECKPOINT_FILE,
-    )
-
-    detect_parser.add_argument(
-        "--img-size",
-        type=int,
-        default=CONSTANTS.IMAGE_SIZE,
-    )
-
-    detect_parser.add_argument(
-        "--conf-thres",
-        type=float,
-        default=0.25,
-    )
 
     return parser
 
@@ -137,13 +105,10 @@ def main():
         import modes.train
         modes.train.main()
 
-    elif args.mode == "test":
-        import modes.test
-        modes.test.main()
-
     elif args.mode == "detect":
         import modes.detect
         modes.detect.main()
+
     else:
         raise ValueError(f"Unknown mode: {args.mode}")
 

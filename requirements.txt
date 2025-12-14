@@ -1,0 +1,8 @@
+torch
+opencv-python
+matplotlib
+albumentations
+pandas
+pillow
+tqdm
+kagglehub
