@@ -285,5 +285,5 @@ def main():
     history["val"] = val_history
 
     import json
-    with open("loss_history.json", "w") as f:
+    with open("plot/loss_history.json", "w") as f:
         json.dump(history, f, indent=4)

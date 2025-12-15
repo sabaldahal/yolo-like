@@ -38,9 +38,9 @@ test_images = images[split_idx:]
 print(f"Train images: {len(train_images)}")
 print(f"Test images:  {len(test_images)}")
 
-# -----------------------------------------------------------
+
 # 4. Create YOLO directory structure
-# -----------------------------------------------------------
+
 yolo_root = Path("./dataset")
 
 def make_dirs(split):

@@ -15,7 +15,7 @@ Download any object detection dataset.
 
 Make sure the dataset is annotated in `YOLO` format.
 
-Split the dataset into training and test set.
+Split the dataset into train, test and val set.
 
 ```text
 project-root/
@@ -26,12 +26,15 @@ project-root/
 │   ├── test/
 │   |   ├── images/
 │   |   ├── labels/
+│   ├── val/
+│   |   ├── images/
+│   |   ├── labels/
 
 ```
 Dataset used for this project: 
 `https://www.kaggle.com/datasets/ravirajsinh45/crop-and-weed-detection-data-with-bounding-boxes`
 
-This dataset can automatically be downloaded and split into train and test set by running the file `dataset_downloader.py`
+This dataset can automatically be downloaded and split into train, test and val set by running the file `dataset_downloader.py`
 
 
 ---
@@ -105,3 +108,9 @@ When nothing is specified as arguments in the terminal, the program uses default
 Default parameters can be found under `./utils/constants.py`
 
 These parameters can be edited here instead of passing as arguments in the terminal.
+
+---
+### Plots
+After the training is completed, `loss_history.json` file will be created under the folder `plot`
+
+This data can be used to visualize the loss plots. To create the plots, run `python ./plot/plot_loss.py`.
