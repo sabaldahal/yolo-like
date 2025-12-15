@@ -7,9 +7,9 @@ class CONSTANTS:
     LOAD_MODEL = False
     SAVE_MODEL = True
     CHECKPOINT_FILE = "checkpoint.pth.tar"
-    BATCH_SIZE = 16
+    BATCH_SIZE = 32
     LEARNING_RATE = 1e-4
-    EPOCHS = 20
+    EPOCHS = 30
     IMAGE_SIZE = 512
     GRID_SIZE = [IMAGE_SIZE // 32, IMAGE_SIZE // 16, IMAGE_SIZE // 8]
     CLASS_LABELS = [
@@ -29,6 +29,9 @@ class CONSTANTS:
     TRAIN_LABELS_DIR = os.path.join(TRAIN_DIR, 'labels')
     TEST_IMAGES_DIR = os.path.join(TEST_DIR, 'images')
     TEST_LABELS_DIR = os.path.join(TEST_DIR, 'labels')
+    VAL_DIR = os.path.join(DATASET_DIR, 'val')
+    VAL_IMAGES_DIR = os.path.join(VAL_DIR, 'images')
+    VAL_LABELS_DIR = os.path.join(VAL_DIR, 'labels')
 
     @classmethod
     def recalculate_dataset_paths(cls,dataset_dir):
@@ -38,3 +41,6 @@ class CONSTANTS:
         cls.TRAIN_LABELS_DIR = os.path.join(cls.TRAIN_DIR, 'labels')
         cls.TEST_IMAGES_DIR = os.path.join(cls.TEST_DIR, 'images')
         cls.TEST_LABELS_DIR = os.path.join(cls.TEST_DIR, 'labels')
+        cls.VAL_DIR = os.path.join(dataset_dir, 'val')
+        cls.VAL_IMAGES_DIR = os.path.join(cls.VAL_DIR, 'images')
+        cls.VAL_LABELS_DIR = os.path.join(cls.VAL_DIR, 'labels')

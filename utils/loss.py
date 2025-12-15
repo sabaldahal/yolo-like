@@ -14,7 +14,7 @@ class YOLOLoss(nn.Module):
         self.cross_entropy = nn.CrossEntropyLoss()
         self.sigmoid = nn.Sigmoid()
     
-    def forward(self, pred, target, anchors):
+    def forward(self, pred, target, anchors, return_components=False):
         # Identifying which cells in target have objects 
         # and which have no objects
         obj = target[..., 0] == 1
@@ -52,10 +52,17 @@ class YOLOLoss(nn.Module):
         class_loss = self.cross_entropy((pred[..., 5:][obj]),
                                    target[..., 5][obj].long())
 
-        # Total loss
-        return (
-            box_loss
-            + object_loss
-            + no_object_loss
-            + class_loss
-        )
+
+
+        total_loss = box_loss + object_loss + no_object_loss + class_loss
+
+        if return_components:
+            return {
+                "total": total_loss,
+                "box": box_loss.detach(),
+                "object": object_loss.detach(),
+                "no_object": no_object_loss.detach(),
+                "class": class_loss.detach(),
+            }
+
+        return total_loss

@@ -71,3 +71,48 @@ for img in test_images:
     copy_pair(img, test_img_dir, test_lbl_dir)
 
 print("\nYOLO dataset prepared at:", yolo_root)
+
+import os
+import random
+import shutil
+from pathlib import Path
+
+# Path to your current test dataset
+TEST_DIR = Path("./dataset/test")
+TEST_IMAGES_DIR = TEST_DIR / "images"
+TEST_LABELS_DIR = TEST_DIR / "labels"
+
+# Define validation split (e.g., 50% of test set)
+val_split = 0.5
+
+# Create new validation directories
+VAL_DIR = TEST_DIR.parent / "val"
+VAL_IMAGES_DIR = VAL_DIR / "images"
+VAL_LABELS_DIR = VAL_DIR / "labels"
+
+VAL_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+VAL_LABELS_DIR.mkdir(parents=True, exist_ok=True)
+
+# Get all image files
+all_images = [f for f in TEST_IMAGES_DIR.glob("*") if f.suffix.lower() in [".jpg", ".jpeg", ".png"]]
+
+# Shuffle for randomness
+random.shuffle(all_images)
+
+# Number of validation samples
+num_val = int(len(all_images) * val_split)
+val_images = all_images[:num_val]
+
+# Move images and corresponding labels to validation folder
+for img_path in val_images:
+    # Move image
+    shutil.move(str(img_path), VAL_IMAGES_DIR / img_path.name)
+    
+    # Move corresponding label
+    label_name = img_path.stem + ".txt"
+    label_path = TEST_LABELS_DIR / label_name
+    if label_path.exists():
+        shutil.move(str(label_path), VAL_LABELS_DIR / label_name)
+
+print(f"Split {num_val} images to validation set.")
+print(f"Remaining test images: {len(list(TEST_IMAGES_DIR.glob('*')))}")
